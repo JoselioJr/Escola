@@ -1,18 +1,15 @@
 package com.joseliojr.Escola.handler;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import jakarta.persistence.EntityNotFoundException;
-
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<String> hancleNotFound(EntityNotFoundException ex) {
-        return ResponseEntity.status(Response.SC_NOT_FOUND).body(ex.getMessage());
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleNotFound(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
     @ExceptionHandler(Exception.class)

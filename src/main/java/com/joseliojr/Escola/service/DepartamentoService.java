@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.joseliojr.Escola.model.Departamento;
 import com.joseliojr.Escola.repository.DepartamentoRepository;
 
-import jakarta.persistence.EntityNotFoundException;
+
 
 @Service
 public class DepartamentoService {
@@ -23,7 +23,7 @@ public class DepartamentoService {
 
     public void deleteById(UUID id) {
         if (!departamentoRepository.existsById(id)) {
-            throw new EntityNotFoundException("Departamento não encontrado com ID: " + id);
+            throw new RuntimeException("Departamento não encontrado com ID: " + id);
         }
         departamentoRepository.deleteById(id);
     }
@@ -44,7 +44,7 @@ public class DepartamentoService {
 
     public Departamento findById(UUID id) {
         return departamentoRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Departamento não encontrado com ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Departamento não encontrado com ID: " + id));
     }
 
     public List<Departamento> findAll() {
@@ -54,7 +54,7 @@ public class DepartamentoService {
     public Departamento findByNome(String nome) {
         Departamento departamento = departamentoRepository.findByNome(nome);
         if (departamento == null) {
-            throw new EntityNotFoundException("Departamento não encontrado com Nome: " + nome);
+            throw new RuntimeException("Departamento não encontrado com Nome: " + nome);
         }
         return departamento;
     }

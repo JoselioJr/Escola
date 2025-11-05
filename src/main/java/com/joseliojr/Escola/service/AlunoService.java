@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.joseliojr.Escola.model.Aluno;
 import com.joseliojr.Escola.repository.AlunoRepository;
 
-import jakarta.persistence.EntityNotFoundException;
+
 
 @Service
 public class AlunoService {
@@ -22,7 +22,7 @@ public class AlunoService {
 
     public void deleteById(UUID id) {
         if (!alunoRepository.existsById(id)) {
-            throw new EntityNotFoundException("Aluno não encontrado com ID: " + id);
+            throw new RuntimeException("Aluno não encontrado com ID: " + id);
         }
         alunoRepository.deleteById(id);
     }
@@ -42,7 +42,7 @@ public class AlunoService {
 
     public Aluno findById(UUID id) {
         return alunoRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Aluno não encontrado com ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Aluno não encontrado com ID: " + id));
     }
 
     public List<Aluno> findAll() {
@@ -52,7 +52,7 @@ public class AlunoService {
     public Aluno findByCpf(String cpf) {
         Aluno aluno = alunoRepository.findByCpf(cpf);
         if (aluno == null) {
-            throw new EntityNotFoundException("Aluno não encontrado com CPF: " + cpf);
+            throw new RuntimeException("Aluno não encontrado com CPF: " + cpf);
         }
         return aluno;
     }
@@ -60,7 +60,7 @@ public class AlunoService {
     public Aluno findByMatricula(int matricula) {
         Aluno aluno = alunoRepository.findByMatricula(matricula);
         if (aluno == null) {
-            throw new EntityNotFoundException("Aluno não encontrado com Matrícula: " + matricula);
+            throw new RuntimeException("Aluno não encontrado com Matrícula: " + matricula);
         }
         return aluno;
     }
@@ -68,7 +68,7 @@ public class AlunoService {
     public Aluno findByEmailInstitucional(String emailInstitucional) {
         Aluno aluno = alunoRepository.findByEmailInstitucional(emailInstitucional);
         if (aluno == null) {
-            throw new EntityNotFoundException("Aluno não encontrado com Email Institucional: " + emailInstitucional);
+            throw new RuntimeException("Aluno não encontrado com Email Institucional: " + emailInstitucional);
         }
         return aluno;
     }

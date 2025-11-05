@@ -1,15 +1,7 @@
 package com.joseliojr.Escola.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-
-@Entity
 public class Funcionario extends Pessoa {
-
-    @Column(nullable = false)
     private String cargo;
-
-    @Column(nullable = false)
     private String tipoVinculo;
 
     public Funcionario() {

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.joseliojr.Escola.model.Professor;
 import com.joseliojr.Escola.repository.ProfessorRepository;
 
-import jakarta.persistence.EntityNotFoundException;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -22,7 +22,7 @@ public class ProfessorService {
 
     public void deleteById(UUID id) {
         if (!professorRepository.existsById(id)) {
-            throw new EntityNotFoundException("Professor não encontrado com ID: " + id);
+            throw new RuntimeException("Professor não encontrado com ID: " + id);
         }
         professorRepository.deleteById(id);
     }
@@ -43,7 +43,7 @@ public class ProfessorService {
 
     public Professor findById(UUID id) {
         return professorRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Professor não encontrado com ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Professor não encontrado com ID: " + id));
     }
 
     public List<Professor> findAll() {
@@ -53,7 +53,7 @@ public class ProfessorService {
     public Professor findByCpf(String cpf) {
         Professor professor = professorRepository.findByCpf(cpf);
         if (professor == null) {
-            throw new EntityNotFoundException("Professor não encontrado com CPF: " + cpf);
+            throw new RuntimeException("Professor não encontrado com CPF: " + cpf);
         }
         return professor;
     }
@@ -61,7 +61,7 @@ public class ProfessorService {
     public Professor findByEmailInstitucional(String emailInstitucional) {
         Professor professor = professorRepository.findByEmailInstitucional(emailInstitucional);
         if (professor == null) {
-            throw new EntityNotFoundException("Professor não encontrado com Email Institucional: " + emailInstitucional);
+            throw new RuntimeException("Professor não encontrado com Email Institucional: " + emailInstitucional);
         }
         return professor;
     }

@@ -2,37 +2,18 @@ package com.joseliojr.Escola.model;
 
 import java.util.UUID;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Pessoa {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
-    @Column(nullable = false)
     private String nomeCompleto;
-
-    @Column(nullable = false, unique = true)
     private String cpf;
-
-    @Column(nullable = false)
     private String emailInstitucional;
-
-    @Column(nullable = false)
     private String telefone;
 
     public Pessoa() {
     }
 
     public Pessoa(String nomeCompleto, String cpf, String emailInstitucional, String telefone) {
+        this.id = UUID.randomUUID();
         this.nomeCompleto = nomeCompleto;
         this.cpf = cpf;
         this.emailInstitucional = emailInstitucional;

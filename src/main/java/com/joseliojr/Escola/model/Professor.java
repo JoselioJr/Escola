@@ -1,17 +1,8 @@
 package com.joseliojr.Escola.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-
-@Entity
 public class Professor extends Pessoa{
-    @Column(nullable = false)
     private String titulacao;
-
-    @Column(nullable = false)
     private String areaAtuacao;
-
-    @Column(nullable = false)
     private int regimeTrabalho;
 
     public Professor() {

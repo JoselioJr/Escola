@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.joseliojr.Escola.model.Funcionario;
 import com.joseliojr.Escola.repository.FuncionarioRepository;
 
-import jakarta.persistence.EntityNotFoundException;
+
 
 @Service
 public class FuncionarioService {
@@ -22,7 +22,7 @@ public class FuncionarioService {
 
     public void deleteById(UUID id) {
         if (!funcionarioRepository.existsById(id)) {
-            throw new EntityNotFoundException("Funcionário não encontrado com ID: " + id);
+            throw new RuntimeException("Funcionário não encontrado com ID: " + id);
         }
         funcionarioRepository.deleteById(id);
     }
@@ -42,7 +42,7 @@ public class FuncionarioService {
 
     public Funcionario findById(UUID id) {
         return funcionarioRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Funcionário não encontrado com ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Funcionário não encontrado com ID: " + id));
     }
 
     public List<Funcionario> findAll() {
@@ -52,7 +52,7 @@ public class FuncionarioService {
     public Funcionario findByNomeCompleto(String nomeCompleto) {
         Funcionario funcionario = funcionarioRepository.findByNomeCompleto(nomeCompleto);
         if (funcionario == null) {
-            throw new EntityNotFoundException("Funcionário não encontrado com Nome Completo: " + nomeCompleto);
+            throw new RuntimeException("Funcionário não encontrado com Nome Completo: " + nomeCompleto);
         }
         return funcionario;
     }
@@ -60,7 +60,7 @@ public class FuncionarioService {
     public Funcionario findByCpf(String cpf) {
         Funcionario funcionario = funcionarioRepository.findByCpf(cpf);
         if (funcionario == null) {
-            throw new EntityNotFoundException("Funcionário não encontrado com CPF: " + cpf);
+            throw new RuntimeException("Funcionário não encontrado com CPF: " + cpf);
         }
         return funcionario;
     }
@@ -68,7 +68,7 @@ public class FuncionarioService {
     public Funcionario findByEmailInstitucional(String emailInstitucional) {
         Funcionario funcionario = funcionarioRepository.findByEmailInstitucional(emailInstitucional);
         if (funcionario == null) {
-            throw new EntityNotFoundException("Funcionário não encontrado com Email Institucional: " + emailInstitucional);
+            throw new RuntimeException("Funcionário não encontrado com Email Institucional: " + emailInstitucional);
         }
         return funcionario;
     }
